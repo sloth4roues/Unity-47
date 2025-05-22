@@ -17,6 +17,15 @@ TagManager:
   - Dirt (Static)
   - Wood
   - Orb
+  - stone
+  - eq
+  - targets
+  - rycle
+  - body
+  - blood
+  - petrol
+  - fireball
+  - wood
   layers:
   - Default
   - TransparentFX
@@ -25,7 +34,7 @@ TagManager:
   - Water
   - UI
   - OrbLayer
-  - 
+  - hitLayers
   - Wall
   - First Person View
   - Character
