@@ -32,9 +32,9 @@ Prototype de base avec :
 
 ## 🌱 Branches
 Chaque version stable est associée à une branche nommée selon le schéma suivant :
-- `v001` → v0.0.1
-- `v002` → v0.0.2
-- `v003` → v0.0.3
+- `v0.0.1` → version 0.0.1
+- `v0.0.2` → version 0.0.2
+- `v0.0.3` → version 0.0.3
 - ...
 Cela permet de suivre l’évolution du jeu, tester les performances ou détecter des bugs introduits.
 

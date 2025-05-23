@@ -4,7 +4,7 @@ Ce fichier présente l'évolution du jeu *Unit 47* à travers différentes versi
 
 ---
 
-## ✅ v0.0.1 – Prototype Jouable Minimal (`v001`)
+## ✅ v0.0.1 – Prototype Jouable Minimal
 - Déplacement (marche/course)
 - Saut
 - Vue FPS avec Mouse Look
@@ -16,7 +16,7 @@ Ce fichier présente l'évolution du jeu *Unit 47* à travers différentes versi
 
 ---
 
-## 🔜 v0.0.2 – Premiers Effets et Polish (`v002`)
+## 🔜 v0.0.2 – Premiers Effets et Polish
 - Ajout d’effets sonores (tir, orbe, cible détruite)
 - Ajout d’effets visuels (muzzle flash, hit effect, orbe collecte)
 - Ajout de particules (orbe, cible détruite)
@@ -26,7 +26,7 @@ Ce fichier présente l'évolution du jeu *Unit 47* à travers différentes versi
 
 ---
 
-## 🔜 v0.0.3 – Premières Compétences (`v003`)
+## 🔜 v0.0.3 – Premières Compétences
 - Implémentation d’une capacité simple (Dash, Flash ou Smoke)
 - Ajout d’un cooldown
 - UI pour la compétence (icône, cooldown)
@@ -34,7 +34,7 @@ Ce fichier présente l'évolution du jeu *Unit 47* à travers différentes versi
 
 ---
 
-## 🔜 v0.1.0 – Démo Jouable (`v010`)
+## 🔜 v0.1.0 – Démo Jouable
 - Scène plus grande
 - Objectifs de mission (collecte d’orbes, destruction de cibles)
 - Timer et score final
@@ -43,7 +43,7 @@ Ce fichier présente l'évolution du jeu *Unit 47* à travers différentes versi
 
 ---
 
-## 🔜 v0.2.0 – Ennemis Simples (`v020`)
+## 🔜 v0.2.0 – Ennemis Simples
 - Ennemis fixes tirant à intervalle
 - Barre de vie joueur
 - Respawn ou fin de partie en cas de mort
@@ -51,14 +51,14 @@ Ce fichier présente l'évolution du jeu *Unit 47* à travers différentes versi
 
 ---
 
-## 🔜 v0.3.0 – AI Simple & Patrouille (`v030`)
+## 🔜 v0.3.0 – AI Simple & Patrouille
 - Bot en patrouille réagissant à la détection
 - Tir lent ou poursuite
 - Ajout de murs/couvertures à utiliser
 
 ---
 
-## 🔜 v0.4.0 – Mode Entraînement (`v040`)
+## 🔜 v0.4.0 – Mode Entraînement
 - Score, combo, précision
 - Cibles apparaissant aléatoirement
 - Limite de temps
@@ -66,7 +66,7 @@ Ce fichier présente l'évolution du jeu *Unit 47* à travers différentes versi
 
 ---
 
-## 🔜 v0.5.0 – Base Multijoueur (optionnel) (`v050`)
+## 🔜 v0.5.0 – Base Multijoueur (optionnel)
 - Synchronisation des joueurs (Mirror ou Netcode)
 - Synchronisation des tirs
 - Lobby simple
@@ -74,7 +74,7 @@ Ce fichier présente l'évolution du jeu *Unit 47* à travers différentes versi
 
 ---
 
-## 🔜 v1.0.0 – Release Solo (`v100`)
+## 🔜 v1.0.0 – Release Solo
 - Menus complets
 - Sauvegarde des scores
 - 2-3 niveaux jouables
