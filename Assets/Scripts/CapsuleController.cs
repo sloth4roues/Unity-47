@@ -9,6 +9,7 @@ public class CapsuleController : MonoBehaviour
     public float jumpForce = 5f;
     public float gravity = -40f;  // Gravité augmentée pour éviter flottement
 
+
     [SerializeField] private CharacterController controller;
     [SerializeField] private Vector3 velocity;
     [SerializeField] private bool isGrounded;

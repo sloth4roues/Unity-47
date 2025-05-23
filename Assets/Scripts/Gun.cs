@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System;
 
 public class Gun : MonoBehaviour
 {
@@ -7,29 +8,46 @@ public class Gun : MonoBehaviour
     public float range = 50f;
     public LayerMask hitLayers;
     public AudioSource shootSound;
+    public ParticleSystem muzzleFlash;
+
+    [Header("Ammunition")]
+    public int maxAmmo = 20;
+    public int currentAmmo;
+
+    public static event Action<int, int> OnAmmoChanged;
+
+    void Start()
+    {
+        currentAmmo = maxAmmo;
+        OnAmmoChanged?.Invoke(currentAmmo, maxAmmo);
+    }
 
     public void Fire(InputAction.CallbackContext context)
     {
-        if (!context.performed)
+        if (!context.performed || currentAmmo <= 0)
             return;
 
-        // Dessine le rayon pendant 1s pour debug
-        Debug.Log("AUO");
+        Shoot();
+    }
+
+    private void Shoot()
+    {
+        currentAmmo--;
+        OnAmmoChanged?.Invoke(currentAmmo, maxAmmo);
+
         Debug.DrawRay(playerCam.transform.position, playerCam.transform.forward * range, Color.red, 1f);
 
-        // Joue le son si présent
+        if (muzzleFlash)
+            muzzleFlash.Play();
+
         if (shootSound)
             shootSound.Play();
 
-        // Raycast pour détecter la cible
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, range, hitLayers))
         {
-            Debug.Log("Touché : " + hit.collider.name);
-
-            if (hit.collider.CompareTag("Target"))
-            {
-                Destroy(hit.collider.gameObject); // OU réduire les PV
-            }
+            var target = hit.collider.GetComponent<Target>();
+            if (target != null)
+                target.Hit();
         }
     }
 }
