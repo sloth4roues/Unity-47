@@ -6,6 +6,8 @@ public class OrbCollector : MonoBehaviour
 {
     public float interactRange = 2f;
     public LayerMask OrbLayer;
+    public AudioSource orbSound;
+    //public ParticleSystem orbFlash;
 
     [Header("UltOrb")]
     public int maxOrb = 20;
@@ -38,6 +40,9 @@ public class OrbCollector : MonoBehaviour
         {
             if (hit.CompareTag("Orb"))
             {
+                if (orbSound)
+                    orbSound.Play();
+
                 currentOrb++;
                 OnOrbChanged?.Invoke(currentOrb, maxOrb); // MAJ UI
                 Destroy(hit.gameObject);

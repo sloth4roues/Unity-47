@@ -34,7 +34,7 @@ TagManager:
   - Water
   - UI
   - OrbLayer
-  - hitLayers
+  - hitLayer
   - Wall
   - First Person View
   - Character
@@ -43,7 +43,7 @@ TagManager:
   - Post Processing Scope
   - Invisible Wall
   - Projectile
-  - 
+  - craftLayer
   - 
   - 
   - 
