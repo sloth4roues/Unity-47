@@ -5,14 +5,14 @@ Ce fichier présente l'évolution du jeu *Unit 47* à travers différentes versi
 ---
 
 ## ✅ v0.0.1 – Prototype Jouable Minimal
-- Déplacement (marche/course)
-- Saut
-- Vue FPS avec Mouse Look
-- Interaction (collecte d’orbes)
-- Ajout d'une arme simple (tir par raycast, effet visuel, son)
-- Cibles fixes destructibles
-- UI simple (nb d’orbes collectées, munitions)
-- Petite map test
+- Déplacement (marche/course) - OUI
+- Saut - OUI
+- Vue FPS avec Mouse Look - OUI
+- Interaction (collecte d’orbes) - OUI
+- Ajout d'une arme simple (tir par raycast, effet visuel, son) - tir par raycast OUI, mais pas de "rendu tir"
+- Cibles fixes destructibles - OUI
+- UI simple (nb d’orbes collectées, munitions) - OUI
+- Petite map test - OUI Map PlayGroundTest + Map1
 
 ---
 
