@@ -63,4 +63,10 @@ public class Gun : MonoBehaviour
                 hitEffectManager.SpawnHitEffect(hit);
         }
     }
+
+    public void Reload()
+    {
+        currentAmmo = maxAmmo;
+        OnAmmoChanged?.Invoke(currentAmmo, maxAmmo);
+    }
 }
