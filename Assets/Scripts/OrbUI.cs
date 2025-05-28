@@ -18,6 +18,6 @@ public class OrbUI : MonoBehaviour
 
     void UpdateOrb(int current, int max)
     {
-        orbText.text = $"Ult{current}/{max}";
+        orbText.text = $"{current} / {max}";
     }
 }
