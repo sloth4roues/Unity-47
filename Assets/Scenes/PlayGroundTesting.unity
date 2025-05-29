@@ -596,7 +596,6 @@ GameObject:
   - component: {fileID: 418511482}
   - component: {fileID: 418511481}
   - component: {fileID: 418511480}
-  - component: {fileID: 418511479}
   - component: {fileID: 418511483}
   m_Layer: 7
   m_Name: SExpCylindre
@@ -605,29 +604,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &418511479
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 418511478}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &418511480
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1548,6 +1524,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1255321944}
   m_CullTransparentMesh: 1
+--- !u!1 &1302663125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1302663126}
+  - component: {fileID: 1302663127}
+  m_Layer: 7
+  m_Name: EffectManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1302663126
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302663125}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1864754564}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1302663127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302663125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f6170f4acbddba478331b90f2129a48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetHitEffect: {fileID: 4330339104162208239, guid: 50e727cee17ef1e49bca6f3901ca154a,
+    type: 3}
+  defaultHitEffect: {fileID: 4330339104162208239, guid: 50e727cee17ef1e49bca6f3901ca154a,
+    type: 3}
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  craftLayer:
+    serializedVersion: 2
+    m_Bits: 65536
 --- !u!1 &1330623853
 GameObject:
   m_ObjectHideFlags: 0
@@ -2151,6 +2181,7 @@ Transform:
   m_Children:
   - {fileID: 1773066505}
   - {fileID: 1408989685}
+  - {fileID: 1302663126}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2032364787
@@ -2324,6 +2355,11 @@ PrefabInstance:
       objectReference: {fileID: 896222541}
     - target: {fileID: 6731821181191657036, guid: dde634a4882bf1d4799e4ce38ae12a1b,
         type: 3}
+      propertyPath: hitEffectManager
+      value: 
+      objectReference: {fileID: 1302663127}
+    - target: {fileID: 6731821181191657036, guid: dde634a4882bf1d4799e4ce38ae12a1b,
+        type: 3}
       propertyPath: shootableLayers.m_Bits
       value: 128
       objectReference: {fileID: 0}
@@ -2382,7 +2418,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2939575159808940365, guid: dde634a4882bf1d4799e4ce38ae12a1b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 7758939457921813068, guid: dde634a4882bf1d4799e4ce38ae12a1b, type: 3}
     m_AddedGameObjects:

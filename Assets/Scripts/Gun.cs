@@ -58,6 +58,9 @@ public class Gun : MonoBehaviour
             if (target != null)
                 target.Hit();
 
+            if (hitEffectManager != null)
+                hitEffectManager.SpawnHitEffect(hit);
+
             if (hit.collider.CompareTag("DestroyableTag"))
             {
                 if (destroyableSoundSpawner != null)
@@ -66,8 +69,7 @@ public class Gun : MonoBehaviour
                 Destroy(hit.collider.gameObject);
             }
 
-            if (hitEffectManager != null)
-                hitEffectManager.SpawnHitEffect(hit);
+
         }
     }
 

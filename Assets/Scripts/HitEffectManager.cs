@@ -10,6 +10,7 @@ public class HitEffectManager : MonoBehaviour
 
     public void SpawnHitEffect(RaycastHit hit)
     {
+        Debug.Log("HitEffect déclenché sur : " + hit.collider.name);
         GameObject effectToSpawn = null;
 
         if (((1 << hit.collider.gameObject.layer) & hitLayer) != 0)
@@ -24,7 +25,8 @@ public class HitEffectManager : MonoBehaviour
         if (effectToSpawn != null)
         {
             GameObject spawned = Instantiate(effectToSpawn, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(spawned, 1.5f);
+            spawned.transform.SetParent(null);
+            Destroy(spawned, 1.5f); // Nettoyage au bout de 1.5f
         }
     }
 }
