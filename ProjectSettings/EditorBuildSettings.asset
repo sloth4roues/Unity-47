@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/PlayGroundTesting.unity
+    path: Assets/Scenes/PlayGroundTesting/PlayGroundTesting.unity
     guid: 3719abfcbfcd7ae478e869c68cbca3af
   - enabled: 1
     path: Assets/Scenes/BladeTest.unity
