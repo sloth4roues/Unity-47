@@ -8,9 +8,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PlayGroundTesting/PlayGroundTesting.unity
     guid: 3719abfcbfcd7ae478e869c68cbca3af
-  - enabled: 1
-    path: Assets/Scenes/BladeTest.unity
-    guid: 8b5b14fdf3e7b8e438b58f2edc1fc32d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9eb07e2d669e9c94e9d7d3c782a916f7,
       type: 2}
