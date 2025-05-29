@@ -9,10 +9,15 @@ public class Gun : MonoBehaviour
     public float range = 50f;
     public LayerMask shootableLayers;
 
-    [Header("Effets visuels et sonores")]
+
+    [Header("Effets visuels")]
     public AudioSource shootSound;
     public ParticleSystem muzzleFlash;
     public HitEffectManager hitEffectManager;
+
+    [Header("Impact Sound")]
+    public SoundSpawner destroyableSoundSpawner;
+
 
     [Header("Munitions")]
     public int maxAmmo = 20;
@@ -55,6 +60,9 @@ public class Gun : MonoBehaviour
 
             if (hit.collider.CompareTag("DestroyableTag"))
             {
+                if (destroyableSoundSpawner != null)
+                    destroyableSoundSpawner.PlaySoundAt(hit.point);
+
                 Destroy(hit.collider.gameObject);
             }
 
