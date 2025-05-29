@@ -26,6 +26,7 @@ TagManager:
   - petrol
   - fireball
   - wood
+  - DestroyableTag
   layers:
   - Default
   - TransparentFX
