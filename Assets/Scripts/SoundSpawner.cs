@@ -2,19 +2,27 @@ using UnityEngine;
 
 public class SoundSpawner : MonoBehaviour
 {
-    public AudioClip clip;
-    public float volume = 1f;
+    public GameObject soundPrefab; 
 
     public void PlaySoundAt(Vector3 position)
     {
-        GameObject tempGO = new GameObject("TempAudio");
-        tempGO.transform.position = position;
+        if (soundPrefab == null)
+        {
+            Debug.LogWarning("SoundPrefab non assigné !");
+            return;
+        }
 
-        AudioSource aSource = tempGO.AddComponent<AudioSource>();
-        aSource.clip = clip;
-        aSource.volume = volume;
-        aSource.Play();
+        GameObject spawned = Instantiate(soundPrefab, position, Quaternion.identity);
+        AudioSource source = spawned.GetComponent<AudioSource>();
 
-        Destroy(tempGO, clip.length);
+        if (source != null)
+        {
+            source.Play();
+            Destroy(spawned, source.clip.length);
+        }
+        else
+        {
+            Destroy(spawned);
+        }
     }
 }

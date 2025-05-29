@@ -1258,6 +1258,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &981182968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 981182969}
+  - component: {fileID: 981182970}
+  m_Layer: 7
+  m_Name: PlayHitDestroyable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &981182969
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981182968}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1773066505}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &981182970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 981182968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d99f574f13b1e6e4fb836226df298330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundPrefab: {fileID: 8507567662740796009, guid: 128cc3390c7191641a6ed1173dc26bf4,
+    type: 3}
 --- !u!1 &1237964198
 GameObject:
   m_ObjectHideFlags: 0
@@ -2051,7 +2097,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1773066505}
-  - component: {fileID: 1773066506}
   m_Layer: 7
   m_Name: SoundManager
   m_TagString: Untagged
@@ -2071,23 +2116,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 981182969}
   m_Father: {fileID: 1864754564}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1773066506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1773066504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d99f574f13b1e6e4fb836226df298330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: 37e08e3552104a248a91d21d637ef2f4, type: 3}
-  volume: 1
 --- !u!1 &1864754563
 GameObject:
   m_ObjectHideFlags: 0
@@ -2299,7 +2331,7 @@ PrefabInstance:
         type: 3}
       propertyPath: destroyableSoundSpawner
       value: 
-      objectReference: {fileID: 1773066506}
+      objectReference: {fileID: 981182970}
     - target: {fileID: 8106327898344516749, guid: dde634a4882bf1d4799e4ce38ae12a1b,
         type: 3}
       propertyPath: m_LocalPosition.x
