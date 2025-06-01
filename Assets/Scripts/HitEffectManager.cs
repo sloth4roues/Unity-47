@@ -8,6 +8,8 @@ public class HitEffectManager : MonoBehaviour
     public LayerMask hitLayer;
     public LayerMask craftLayer;
 
+    public GameObject destructionEffect;
+
     public void SpawnHitEffect(RaycastHit hit)
     {
 
@@ -32,4 +34,14 @@ public class HitEffectManager : MonoBehaviour
             Destroy(spawned, 1.5f);
         }
     }
+    public void SpawnDestructionEffect(Vector3 position, Vector3 normal)
+    {
+        if (destructionEffect != null)
+        {
+            GameObject spawned = Instantiate(destructionEffect, position, Quaternion.LookRotation(normal));
+            spawned.transform.SetParent(null);
+            Destroy(spawned, 2f);
+        }
+    }
+
 }

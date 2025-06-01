@@ -9,7 +9,6 @@ public class Gun : MonoBehaviour
     public float range = 50f;
     public LayerMask shootableLayers;
 
-
     [Header("Effets visuels")]
     public AudioSource shootSound;
     public ParticleSystem muzzleFlash;
@@ -18,10 +17,12 @@ public class Gun : MonoBehaviour
     [Header("Impact Sound")]
     public SoundSpawner destroyableSoundSpawner;
 
-
     [Header("Munitions")]
     public int maxAmmo = 20;
     public int currentAmmo;
+
+    [Header("Trail")]
+    public GameObject bulletTrailPrefab;
 
     public static event Action<int, int> OnAmmoChanged;
 
@@ -52,8 +53,12 @@ public class Gun : MonoBehaviour
         if (shootSound)
             shootSound.Play();
 
+        Vector3 hitPoint = playerCam.transform.position + playerCam.transform.forward * range;
+
         if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, range, shootableLayers))
         {
+            hitPoint = hit.point;
+
             var target = hit.collider.GetComponent<Target>();
             if (target != null)
                 target.Hit();
@@ -66,21 +71,39 @@ public class Gun : MonoBehaviour
                 if (destroyableSoundSpawner != null)
                     destroyableSoundSpawner.PlaySoundAt(hit.point);
 
+                if (hitEffectManager != null)
+                    hitEffectManager.SpawnDestructionEffect(hit.point, hit.normal);
+
                 Destroy(hit.collider.gameObject);
             }
-
-
         }
-        if (currentAmmo == 0) {
+
+        SpawnBulletTrail(playerCam.transform.position, hitPoint);
+
+        if (currentAmmo == 0)
             Reload();
-        }
     }
-
-
 
     public void Reload()
     {
         currentAmmo = maxAmmo;
         OnAmmoChanged?.Invoke(currentAmmo, maxAmmo);
     }
+
+    private void SpawnBulletTrail(Vector3 start, Vector3 end)
+    {
+        if (bulletTrailPrefab == null) return;
+
+        GameObject trail = Instantiate(bulletTrailPrefab, start, Quaternion.identity);
+        LineRenderer lr = trail.GetComponent<LineRenderer>();
+
+        if (lr)
+        {
+            lr.SetPosition(0, start);
+            lr.SetPosition(1, end);
+        }
+
+        Destroy(trail, 0.2f);
+    }
 }
+
