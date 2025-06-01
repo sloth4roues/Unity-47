@@ -1,16 +1,23 @@
+using TMPro;
 using UnityEngine;
 
 public class LifeUI : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public TextMeshProUGUI lifeText;
+
+    void OnEnable()
     {
-        
+        LifePlayer.OnHPChanged += UpdateLife;
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnDisable()
     {
-        
+        LifePlayer.OnHPChanged -= UpdateLife;
+    }
+
+    void UpdateLife(int current, int max)
+    {
+        lifeText.text = $"{current} / {max}";
     }
 }
+

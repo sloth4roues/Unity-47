@@ -2482,6 +2482,7 @@ GameObject:
   - component: {fileID: 1408989684}
   - component: {fileID: 1408989686}
   - component: {fileID: 1408989687}
+  - component: {fileID: 1408989688}
   m_Layer: 7
   m_Name: UI Manager
   m_TagString: Untagged
@@ -2543,6 +2544,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fpsText: {fileID: 2032364789}
+--- !u!114 &1408989688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408989683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d36c68b30797e47a9c5ead2c27d684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeText: {fileID: 101512842}
 --- !u!1 &1492829368
 GameObject:
   m_ObjectHideFlags: 0
@@ -2818,6 +2832,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1738091757}
   - component: {fileID: 1738091756}
+  - component: {fileID: 1738091758}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -2905,6 +2920,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &1738091758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1738091755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_RenderingLayers: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_ShadowRenderingLayers: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}
+  m_SoftShadowQuality: 0
 --- !u!1 &1770133906
 GameObject:
   m_ObjectHideFlags: 0
@@ -3077,6 +3115,26 @@ Transform:
   - {fileID: 1302663126}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1868786465 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2462406364198353677, guid: dde634a4882bf1d4799e4ce38ae12a1b,
+    type: 3}
+  m_PrefabInstance: {fileID: 4251273029375575899}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1868786474
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1868786465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3f24203a8f7e824e92240297283f49f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 100
+  currentHP: 0
 --- !u!1 &1922432005
 GameObject:
   m_ObjectHideFlags: 0
@@ -3350,8 +3408,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 2939575159808940365, guid: dde634a4882bf1d4799e4ce38ae12a1b, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 7758939457921813068, guid: dde634a4882bf1d4799e4ce38ae12a1b, type: 3}
     m_AddedGameObjects:
@@ -3359,7 +3416,11 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 896222542}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2462406364198353677, guid: dde634a4882bf1d4799e4ce38ae12a1b,
+        type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 1868786474}
   m_SourcePrefab: {fileID: 100100000, guid: dde634a4882bf1d4799e4ce38ae12a1b, type: 3}
 --- !u!1001 &5136662958618819834
 PrefabInstance:

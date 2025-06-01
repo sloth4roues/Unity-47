@@ -196,7 +196,8 @@ MonoBehaviour:
     m_Bits: 0
   shootSound: {fileID: 7828463635100244844}
   muzzleFlash: {fileID: 7335613608926761041}
-  hitEffectManager: {fileID: 2939575159808940365}
+  hitEffectManager: {fileID: 0}
+  destroyableSoundSpawner: {fileID: 0}
   maxAmmo: 20
   currentAmmo: 0
 --- !u!82 &7828463635100244844
@@ -312,7 +313,6 @@ GameObject:
   - component: {fileID: 2468980520226596028}
   - component: {fileID: 4200385378556381857}
   - component: {fileID: 8557377013296095661}
-  - component: {fileID: 2939575159808940365}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -808,28 +808,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2939575159808940365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2462406364198353677}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f6170f4acbddba478331b90f2129a48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetHitEffect: {fileID: 4330339104162208239, guid: c792af3578969604da23db8ddeab27ff,
-    type: 3}
-  defaultHitEffect: {fileID: 4330339104162208239, guid: 50e727cee17ef1e49bca6f3901ca154a,
-    type: 3}
-  hitLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  craftLayer:
-    serializedVersion: 2
-    m_Bits: 65536
 --- !u!1 &4304205400987050058
 GameObject:
   m_ObjectHideFlags: 0
