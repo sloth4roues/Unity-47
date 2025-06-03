@@ -4,8 +4,11 @@ using System;
 
 public class Gun : MonoBehaviour
 {
-    [Header("Camera & Tir")]
+    [Header("Références")]
     public Camera playerCam;
+    public Transform muzzlePoint;
+
+    [Header("Tir")]
     public float range = 50f;
     public LayerMask shootableLayers;
 
@@ -21,7 +24,7 @@ public class Gun : MonoBehaviour
     public int maxAmmo = 20;
     public int currentAmmo;
 
-    [Header("Trail")]
+    [Header("Traînée visuelle")]
     public GameObject bulletTrailPrefab;
 
     public static event Action<int, int> OnAmmoChanged;
@@ -45,17 +48,17 @@ public class Gun : MonoBehaviour
         currentAmmo--;
         OnAmmoChanged?.Invoke(currentAmmo, maxAmmo);
 
-        Debug.DrawRay(playerCam.transform.position, playerCam.transform.forward * range, Color.red, 1f);
-
         if (muzzleFlash)
             muzzleFlash.Play();
 
         if (shootSound)
             shootSound.Play();
 
+        Ray ray = new Ray(playerCam.transform.position, playerCam.transform.forward);
+        RaycastHit hit;
         Vector3 hitPoint = playerCam.transform.position + playerCam.transform.forward * range;
 
-        if (Physics.Raycast(playerCam.transform.position, playerCam.transform.forward, out RaycastHit hit, range, shootableLayers))
+        if (Physics.Raycast(ray, out hit, range, shootableLayers))
         {
             hitPoint = hit.point;
 
@@ -68,17 +71,13 @@ public class Gun : MonoBehaviour
 
             if (hit.collider.CompareTag("DestroyableTag"))
             {
-                if (destroyableSoundSpawner != null)
-                    destroyableSoundSpawner.PlaySoundAt(hit.point);
-
-                if (hitEffectManager != null)
-                    hitEffectManager.SpawnDestructionEffect(hit.point, hit.normal);
-
+                destroyableSoundSpawner?.PlaySoundAt(hit.point);
+                hitEffectManager?.SpawnDestructionEffect(hit.point, hit.normal);
                 Destroy(hit.collider.gameObject);
             }
         }
 
-        SpawnBulletTrail(playerCam.transform.position, hitPoint);
+        SpawnBulletTrail(muzzlePoint.position, hitPoint);
 
         if (currentAmmo == 0)
             Reload();
@@ -106,4 +105,3 @@ public class Gun : MonoBehaviour
         Destroy(trail, 0.2f);
     }
 }
-
