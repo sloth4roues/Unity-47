@@ -3,18 +3,44 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    public string sceneToLoad = "Level1";
+    [Header("UI Panels")]
+    public GameObject panelMainMenu;
+    public GameObject panelGameModeSelect;
 
-    void Update()
+    [Header("Scene Names")]
+    public string level1SceneName = "Level1";
+    public string playgroundSceneName = "Playground";
+
+    void Start()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            StartGame();
-        }
+        ShowMainMenu();
     }
 
-    public void StartGame()
+    public void ShowMainMenu()
     {
-        SceneManager.LoadScene(sceneToLoad);
+        panelMainMenu.SetActive(true);
+        panelGameModeSelect.SetActive(false);
+    }
+
+    public void ShowGameModeSelect()
+    {
+        panelMainMenu.SetActive(false);
+        panelGameModeSelect.SetActive(true);
+    }
+
+    public void LoadLevel1()
+    {
+        SceneManager.LoadScene(level1SceneName);
+    }
+
+    public void LoadPlayground()
+    {
+        SceneManager.LoadScene(playgroundSceneName);
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("Quitting game...");
+        Application.Quit();
     }
 }
