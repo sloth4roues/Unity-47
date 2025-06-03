@@ -8,27 +8,26 @@
 Créer un jeu complet jouable en solo, où le joueur pourra se déplacer, tirer, utiliser des compétences simples et évoluer dans des environnements variés. Le multijoueur est envisagé comme une option future.
 
 ## 📦 Technologies
-- Unity (URP ou Built-In)
+- Unity (URP)
 - C# (MonoBehaviour + Input System)
 - Git pour la gestion de version
 - (Optionnel) Netcode for GameObjects ou Mirror (multijoueur plus tard)
 
-## ▶️ Version actuelle : v0.0.1
+## ▶️ Version actuelle : v0.0.2
 
-Prototype de base avec :
-- Déplacement FPS (marche/course, saut)
-- Caméra à la première personne
-- Interaction (collecte d’orbes)
-- Système de tir simple (raycast + impact)
-- Cibles fixes à détruire
-- UI minimale (munitions, orbes)
-- Petite map de test
+Ajout spécifique à la v0.0.2 : 
+- Ajout d’effets sonores (tir, orbe, cible détruite)
+- Ajout d’effets visuels (muzzle flash, hit effect, orbe collecte)
+- Ajout de particules (orbe, cible détruite)
+- HUD avec barre de vie, viseur, bullet trail
+- Écran titre simpl, avec sous menu GameMode
 
 ## 🧪 Comment lancer le projet
 1. Cloner ce dépôt
-2. Ouvrir le projet dans Unity (version recommandée : 2022.3 LTS ou plus)
-3. Scène principale : `Scenes/Prototype.unity`
-4. Jouer depuis l’éditeur (`Play`)
+2. Ouvrir le projet dans Unity (version recommandée : 6.0 ou plus)
+3. Build le projet dans un dossier 'Build' par exemple, à la racine du projet ( EN DEHORS DU DOSSIER ASSET ) 
+4. Lancer le .exe
+5. Amusez-vous 😎
 
 ## 🌱 Branches
 Chaque version stable est associée à une branche nommée selon le schéma suivant :
