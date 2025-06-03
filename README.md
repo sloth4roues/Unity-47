@@ -8,7 +8,7 @@
 Créer un jeu complet jouable en solo, où le joueur pourra se déplacer, tirer, utiliser des compétences simples et évoluer dans des environnements variés. Le multijoueur est envisagé comme une option future.
 
 ## 📦 Technologies
-- Unity (URP ou Built-In)
+- Unity (Built-In pour la v0.0.1, puis URP pour les versions +0.0.1)
 - C# (MonoBehaviour + Input System)
 - Git pour la gestion de version
 - (Optionnel) Netcode for GameObjects ou Mirror (multijoueur plus tard)
@@ -26,9 +26,10 @@ Prototype de base avec :
 
 ## 🧪 Comment lancer le projet
 1. Cloner ce dépôt
-2. Ouvrir le projet dans Unity (version recommandée : 2022.3 LTS ou plus)
-3. Scène principale : `Scenes/Prototype.unity`
+2. Ouvrir le projet dans Unity (version recommandée : 6.0 ou plus)
+3. Scène principale : `Scenes/PlayGroundTest.unity`
 4. Jouer depuis l’éditeur (`Play`)
+5. Amusez-vous 🗣️🔥
 
 ## 🌱 Branches
 Chaque version stable est associée à une branche nommée selon le schéma suivant :
