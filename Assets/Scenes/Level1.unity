@@ -3744,9 +3744,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goalText: {fileID: 221837063}
-  targetKills: 2
+  targetKills: 30
   timerText: {fileID: 1842495208}
-  totalTime: 5
+  totalTime: 30
   ammoText: {fileID: 988768117}
   fpsText: {fileID: 1274591295}
   winPanel: {fileID: 965771968}

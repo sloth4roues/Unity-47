@@ -70,7 +70,13 @@ public class UIManager : MonoBehaviour
 
         currentKills++;
         UpdateGoalText();
+
+        if (currentKills >= targetKills && !gameEnded)
+        {
+            EndGame(true); 
+        }
     }
+
 
     void UpdateGoalText()
     {
