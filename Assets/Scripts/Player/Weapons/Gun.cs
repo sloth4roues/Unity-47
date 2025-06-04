@@ -29,11 +29,15 @@ public class Gun : MonoBehaviour
 
     public static event Action<int, int> OnAmmoChanged;
 
+    private UIManager uiManager;
+
     void Start()
     {
         currentAmmo = maxAmmo;
-        OnAmmoChanged?.Invoke(currentAmmo, maxAmmo);
+        uiManager = FindObjectOfType<UIManager>();
+        uiManager?.UpdateAmmo(currentAmmo, maxAmmo);
     }
+
 
     public void Fire(InputAction.CallbackContext context)
     {

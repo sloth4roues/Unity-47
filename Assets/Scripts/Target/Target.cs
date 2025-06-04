@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    public GameObject hitSoundPrefab;
+    public static event System.Action<GameObject> OnAnyTargetDestroyed;
+
 
     public void Hit()
     {
-        if (hitSoundPrefab)
-            Instantiate(hitSoundPrefab, transform.position, Quaternion.identity);
-
+        FindObjectOfType<UIManager>()?.RegisterKill();
         FindObjectOfType<GameManager>()?.RegisterTargetDestroyed();
+        OnAnyTargetDestroyed?.Invoke(gameObject);
         Destroy(gameObject);
     }
 }
