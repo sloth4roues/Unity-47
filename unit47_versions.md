@@ -16,13 +16,12 @@ Ce fichier présente l'évolution du jeu *Unit 47* à travers différentes versi
 
 ---
 
-## 🔜 v0.0.2 – Premiers Effets et Polish
+## ✅ v0.0.2 – Premiers Effets et Polish
 - Ajout d’effets sonores (tir, orbe, cible détruite)
 - Ajout d’effets visuels (muzzle flash, hit effect, orbe collecte)
 - Ajout de particules (orbe, cible détruite)
-- HUD avec barre de vie ou effets visuels au tir
-- Écran titre simple ("Press F to start")
-- Légère amélioration de la map (visuels, lumières)
+- HUD avec barre de vie, viseur, bullet trail
+- Écran titre simpl, avec sous menu GameMode
 
 ---
 
