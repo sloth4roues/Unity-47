@@ -12,6 +12,6 @@ public class EndGameButtons : MonoBehaviour
     public void ReturnToMenu()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene("MenuPrincipal");
+        SceneManager.LoadScene("Menu");
     }
 }

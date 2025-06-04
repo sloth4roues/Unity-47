@@ -1,4 +1,4 @@
-using UnityEngine;
+Ôªøusing UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
@@ -25,6 +25,10 @@ public class UIManager : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
 
+    [Header("Fin de jeu")]
+    public EndGameHandler endGameHandler;
+
+
     private bool gameEnded = false;
 
     void Start()
@@ -47,7 +51,7 @@ public class UIManager : MonoBehaviour
             {
                 remainingTime = 0;
                 UpdateTimerText();
-                EndGame(false); // DÈfaite
+                EndGame(false); // D√©faite
                 return;
             }
 
@@ -97,7 +101,9 @@ public class UIManager : MonoBehaviour
         // Ralentir le temps au lieu de le geler
         Time.timeScale = 0.01f;
 
-
-        // autres chose ‡ dÈsactiver ici
+        // üîÅ Tourner vers le menu 3D
+        if (endGameHandler != null)
+            endGameHandler.TriggerEndGameView();
     }
+
 }
