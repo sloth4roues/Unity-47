@@ -9,6 +9,7 @@ public class Target : MonoBehaviour
         if (hitSoundPrefab)
             Instantiate(hitSoundPrefab, transform.position, Quaternion.identity);
 
+        FindObjectOfType<GameManager>()?.RegisterTargetDestroyed();
         Destroy(gameObject);
     }
 }
