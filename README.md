@@ -8,7 +8,7 @@
 Créer un jeu complet jouable en solo, où le joueur pourra se déplacer, tirer, utiliser des compétences simples et évoluer dans des environnements variés. Le multijoueur est envisagé comme une option future.
 
 ## 📦 Technologies
-- Unity (URP ou Built-In)
+- Unity (URP)
 - C# (MonoBehaviour + Input System)
 - Git pour la gestion de version
 - (Optionnel) Netcode for GameObjects ou Mirror (multijoueur plus tard)
