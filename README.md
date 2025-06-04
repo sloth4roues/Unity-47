@@ -13,16 +13,14 @@ Créer un jeu complet jouable en solo, où le joueur pourra se déplacer, tirer,
 - Git pour la gestion de version
 - (Optionnel) Netcode for GameObjects ou Mirror (multijoueur plus tard)
 
-## ▶️ Version actuelle : v0.0.1
+## ✅ Version actuelle : v0.0.2
 
-Prototype de base avec :
-- Déplacement FPS (marche/course, saut)
-- Caméra à la première personne
-- Interaction (collecte d’orbes)
-- Système de tir simple (raycast + impact)
-- Cibles fixes à détruire
-- UI minimale (munitions, orbes)
-- Petite map de test
+- Ajout d’effets sonores (tir, orbe, cible détruite)
+- Ajout d’effets visuels (muzzle flash, hit effect, orbe collecte)
+- Ajout de particules (orbe, cible détruite)
+- HUD avec barre de vie, viseur, bullet trail
+- Écran titre simpl, avec sous menu GameMode
+
 
 ## 🧪 Comment lancer le projet
 1. Cloner ce dépôt
