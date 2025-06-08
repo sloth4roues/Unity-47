@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class SpawnBots : MonoBehaviour
 {
+    [Header("Mode de jeu")]
+    public GameMode gameMode = GameMode.TimeAttack;
+
     [Header("Prefab de la cible")]
     public GameObject targetPrefab;
 
@@ -11,10 +14,16 @@ public class SpawnBots : MonoBehaviour
     public float rangeY = 3f;
     public float fixedZ = 10f;
 
-    [Header("Paramètres")]
+    [Header("Paramètres TimeAttack")]
     public int maxActiveTargets = 3;
+    public int totalTargetsToSpawn = 30;
+
+    [Header("Paramètres Endless")]
+    public bool addTimeOnKill = true;
+    public float timeToAddPerKill = 1f;
 
     private List<GameObject> activeTargets = new List<GameObject>();
+    private int totalSpawned = 0;
 
     void OnEnable()
     {
@@ -28,8 +37,15 @@ public class SpawnBots : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < maxActiveTargets; i++)
-            SpawnOne();
+        if (gameMode == GameMode.TimeAttack)
+        {
+            for (int i = 0; i < maxActiveTargets; i++)
+                SpawnOne();
+        }
+        else if (gameMode == GameMode.Endless)
+        {
+            SpawnOne(); // Une seule cible au début
+        }
     }
 
     void HandleTargetDestroyed(GameObject destroyedTarget)
@@ -37,7 +53,17 @@ public class SpawnBots : MonoBehaviour
         if (activeTargets.Contains(destroyedTarget))
             activeTargets.Remove(destroyedTarget);
 
-        SpawnOne(); // Remplacer celle qui vient d’être détruite
+        if (gameMode == GameMode.TimeAttack)
+        {
+            totalSpawned++;
+            if (totalSpawned < totalTargetsToSpawn)
+                SpawnOne();
+        }
+        else if (gameMode == GameMode.Endless)
+        {
+            FindObjectOfType<UIManager>()?.AddTime(timeToAddPerKill);
+            SpawnOne(); // Toujours respawn une cible
+        }
     }
 
     void SpawnOne()

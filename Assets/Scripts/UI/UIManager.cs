@@ -25,10 +25,6 @@ public class UIManager : MonoBehaviour
     public GameObject winPanel;
     public GameObject losePanel;
 
-    [Header("Fin de jeu")]
-    public EndGameHandler endGameHandler;
-
-
     private bool gameEnded = false;
 
     void Start()
@@ -80,9 +76,18 @@ public class UIManager : MonoBehaviour
 
     void UpdateGoalText()
     {
+        if (goalText == null) return;
+
+        if (targetKills <= 0)
+        {
+            goalText.text = ""; // Objectif facultatif
+            return;
+        }
+
         int killsLeft = Mathf.Max(0, targetKills - currentKills);
         goalText.text = $"Kill {killsLeft} bots";
     }
+
 
     void UpdateTimerText()
     {
@@ -106,9 +111,6 @@ public class UIManager : MonoBehaviour
 
         // Ralentir le temps au lieu de le geler
         Time.timeScale = 0.01f;
-
-        if (endGameHandler != null)
-            endGameHandler.TriggerEndGameView();
     }
     public void AddTime(float amount)
     {
