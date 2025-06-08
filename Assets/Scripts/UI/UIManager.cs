@@ -107,9 +107,14 @@ public class UIManager : MonoBehaviour
         // Ralentir le temps au lieu de le geler
         Time.timeScale = 0.01f;
 
-        // 🔁 Tourner vers le menu 3D
         if (endGameHandler != null)
             endGameHandler.TriggerEndGameView();
     }
+    public void AddTime(float amount)
+    {
+        if (!gameEnded)
+            remainingTime += amount;
+    }
+
 
 }
