@@ -62,23 +62,19 @@ public class Gun : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
-        Debug.Log("Fire appelé - Ammo: " + currentAmmo + ", GameEnded: " + GameSession.Instance?.gameEnded);
 
         if (!context.performed)
         {
-            Debug.Log("Fire ignoré : !context.performed");
             return;
         }
 
         if (GameSession.Instance != null && GameSession.Instance.gameEnded)
         {
-            Debug.Log("Fire ignoré : gameEnded = true");
             return;
         }
 
         if (currentAmmo <= 0)
         {
-            Debug.Log("Fire ignoré : plus de munitions");
             return;
         }
 
@@ -89,7 +85,6 @@ public class Gun : MonoBehaviour
 
     private void Shoot()
     {
-        Debug.Log(">>> Shoot() appelé !");
 
         currentAmmo--;
         OnAmmoChanged?.Invoke(currentAmmo, maxAmmo);

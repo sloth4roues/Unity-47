@@ -14,7 +14,6 @@ public class GameSession : MonoBehaviour
     void Awake()
     {
         var inputs = FindObjectsOfType<PlayerInput>();
-        Debug.Log("Nombre de PlayerInput dans la scène : " + inputs.Length);
         if (Instance == null)
         {
             Instance = this;

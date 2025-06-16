@@ -5,9 +5,7 @@ public class EndGameButtons : MonoBehaviour
 {
     public void ReplayLevel()
     {
-        Debug.Log("Replay - ActiveScene: " + SceneManager.GetActiveScene().name);
         Time.timeScale = 1f;
-        Debug.Log("TimeScale: " + Time.timeScale);
 
         // Réinitialiser l'état de la game
         GameSession gameSession = FindObjectOfType<GameSession>();

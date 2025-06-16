@@ -54,7 +54,6 @@ public class CapsuleController : MonoBehaviour
     private void Start()
     {
         input = GetComponent<PlayerInput>();
-        Debug.Log("Action Map active au Start : " + input.currentActionMap.name);
     }
 
     void Update()
@@ -83,7 +82,6 @@ public class CapsuleController : MonoBehaviour
 
     public void Move(InputAction.CallbackContext context)
     {
-        Debug.Log("Walking");
         moveInput = context.ReadValue<Vector2>();
     }
 
