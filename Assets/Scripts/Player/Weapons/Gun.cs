@@ -31,6 +31,7 @@ public class Gun : MonoBehaviour
     public static event Action<int, int> OnAmmoChanged;
 
     private UIManager uiManager;
+
     private void Awake()
     {
         input = GetComponent<PlayerInput>();
@@ -45,7 +46,7 @@ public class Gun : MonoBehaviour
 
     private void OnEnable()
     {
-        if (input != null && input.actions != null)
+        if (input?.actions != null)
         {
             input.actions["Fire"].performed += Fire;
             input.actions["Fire"].Enable();
@@ -54,7 +55,7 @@ public class Gun : MonoBehaviour
 
     private void OnDisable()
     {
-        if (input != null && input.actions != null)
+        if (input?.actions != null)
         {
             input.actions["Fire"].performed -= Fire;
         }
@@ -62,38 +63,22 @@ public class Gun : MonoBehaviour
 
     public void Fire(InputAction.CallbackContext context)
     {
-
-        if (!context.performed)
-        {
+        if (!context.performed || currentAmmo <= 0)
             return;
-        }
 
         if (GameSession.Instance != null && GameSession.Instance.gameEnded)
-        {
             return;
-        }
-
-        if (currentAmmo <= 0)
-        {
-            return;
-        }
-
 
         Shoot();
     }
 
-
     private void Shoot()
     {
-
         currentAmmo--;
         OnAmmoChanged?.Invoke(currentAmmo, maxAmmo);
 
-        if (muzzleFlash)
-            muzzleFlash.Play();
-
-        if (shootSound)
-            shootSound.Play();
+        muzzleFlash?.Play();
+        shootSound?.Play();
 
         Ray ray = new Ray(playerCam.transform.position, playerCam.transform.forward);
         RaycastHit hit;
@@ -103,12 +88,8 @@ public class Gun : MonoBehaviour
         {
             hitPoint = hit.point;
 
-            var target = hit.collider.GetComponent<Target>();
-            if (target != null)
-                target.Hit();
-
-            if (hitEffectManager != null)
-                hitEffectManager.SpawnHitEffect(hit);
+            hit.collider.GetComponent<Target>()?.Hit();
+            hitEffectManager?.SpawnHitEffect(hit);
 
             if (hit.collider.CompareTag("DestroyableTag"))
             {

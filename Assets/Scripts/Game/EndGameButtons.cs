@@ -3,29 +3,30 @@ using UnityEngine.SceneManagement;
 
 public class EndGameButtons : MonoBehaviour
 {
+    private void Awake()
+    {
+        GameSession.Instance?.ResetGameState();
+    }
+
     public void ReplayLevel()
     {
         Time.timeScale = 1f;
 
-        // Réinitialiser l'état de la game
-        GameSession gameSession = FindObjectOfType<GameSession>();
-        if (gameSession != null)
-        {
-            gameSession.ResetGameState();
-        }
-        else
-        {
-            Debug.LogWarning("GameSession introuvable pour reset.");
-        }
+        GameSession.Instance?.ResetGameState();
 
+        // Recharger la scène actuelle
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
-
 
     public void ReturnToMenu()
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("Menu");
     }
+
+    public void OnButtonClicked()
+    {
+        Debug.Log("BOUTON CLIQUÉ !");
+    }
+
 }

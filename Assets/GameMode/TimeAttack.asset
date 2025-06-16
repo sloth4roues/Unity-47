@@ -15,7 +15,7 @@ MonoBehaviour:
   currentGameMode: 0
   targetPrefab: {fileID: 9213626513879424142, guid: 9668790cfd3c8594d8567720ba251019,
     type: 3}
-  timeAttackTargetCount: 10
-  timeAttackMaxSimultaneousTargets: 100
-  timeAttackDuration: 10
+  timeAttackTargetCount: 3
+  timeAttackMaxSimultaneousTargets: 50
+  timeAttackDuration: 7
   endlessTimeBonusPerKill: 0

@@ -3,26 +3,24 @@ using UnityEngine.InputSystem;
 
 public class GameSession : MonoBehaviour
 {
-    public static GameSession Instance;
+    public static GameSession Instance { get; private set; }
 
     public int finalScore = 0;
     public float timeElapsed = 0f;
     public GameMode modePlayed;
 
-    public bool gameEnded = false; // ← AJOUT OBLIGATOIRE
+    public bool gameEnded = false;
 
-    void Awake()
+    private void Awake()
     {
-        var inputs = FindObjectsOfType<PlayerInput>();
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
+        Debug.Log("GameSession (NON persistante) créée");
+    }
+
+    private void Update()
+    {
+        Debug.Log("PlayerInput actifs : " + FindObjectsOfType<PlayerInput>().Length);
+
     }
 
     public void EndSession()
@@ -33,6 +31,8 @@ public class GameSession : MonoBehaviour
     public void ResetGameState()
     {
         gameEnded = false;
+        finalScore = 0;
+        timeElapsed = 0f;
+        modePlayed = default;
     }
-
 }
