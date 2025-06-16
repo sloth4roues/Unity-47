@@ -27,9 +27,14 @@ public class Gun : MonoBehaviour
     [Header("Traînée visuelle")]
     public GameObject bulletTrailPrefab;
 
+    private PlayerInput input;
     public static event Action<int, int> OnAmmoChanged;
 
     private UIManager uiManager;
+    private void Awake()
+    {
+        input = GetComponent<PlayerInput>();
+    }
 
     void Start()
     {
@@ -38,17 +43,54 @@ public class Gun : MonoBehaviour
         uiManager?.UpdateAmmo(currentAmmo, maxAmmo);
     }
 
+    private void OnEnable()
+    {
+        if (input != null && input.actions != null)
+        {
+            input.actions["Fire"].performed += Fire;
+            input.actions["Fire"].Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (input != null && input.actions != null)
+        {
+            input.actions["Fire"].performed -= Fire;
+        }
+    }
 
     public void Fire(InputAction.CallbackContext context)
     {
-        if (!context.performed || currentAmmo <= 0)
+        Debug.Log("Fire appelé - Ammo: " + currentAmmo + ", GameEnded: " + GameSession.Instance?.gameEnded);
+
+        if (!context.performed)
+        {
+            Debug.Log("Fire ignoré : !context.performed");
             return;
+        }
+
+        if (GameSession.Instance != null && GameSession.Instance.gameEnded)
+        {
+            Debug.Log("Fire ignoré : gameEnded = true");
+            return;
+        }
+
+        if (currentAmmo <= 0)
+        {
+            Debug.Log("Fire ignoré : plus de munitions");
+            return;
+        }
+
 
         Shoot();
     }
 
+
     private void Shoot()
     {
+        Debug.Log(">>> Shoot() appelé !");
+
         currentAmmo--;
         OnAmmoChanged?.Invoke(currentAmmo, maxAmmo);
 

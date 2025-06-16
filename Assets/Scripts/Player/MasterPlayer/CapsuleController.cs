@@ -7,8 +7,7 @@ public class CapsuleController : MonoBehaviour
     public float runSpeed = 5f;
     public float walkSpeed = 2f;
     public float jumpForce = 5f;
-    public float gravity = -40f;  // Gravité augmentée pour éviter flottement
-
+    public float gravity = -40f;
 
     [SerializeField] private CharacterController controller;
     [SerializeField] private Vector3 velocity;
@@ -17,19 +16,56 @@ public class CapsuleController : MonoBehaviour
     [SerializeField] private bool jumpQueued;
     [SerializeField] private bool isWalking = false;
 
+    private PlayerInput input;
+
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
+        input = GetComponent<PlayerInput>();
+    }
+
+    private void OnEnable()
+    {
+        // Enregistrement des callbacks Input
+        if (input != null && input.actions != null)
+        {
+            input.actions["Move"].performed += Move;
+            input.actions["Move"].canceled += Move;
+            input.actions["Jump"].performed += Jump;
+            input.actions["WalkRun"].performed += WalkRun;
+
+            input.actions["Move"].Enable();
+            input.actions["Jump"].Enable();
+            input.actions["WalkRun"].Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (input != null && input.actions != null)
+        {
+            input.actions["Move"].performed -= Move;
+            input.actions["Move"].canceled -= Move;
+            input.actions["Jump"].performed -= Jump;
+            input.actions["WalkRun"].performed -= WalkRun;
+        }
+    }
+
+    private void Start()
+    {
+        input = GetComponent<PlayerInput>();
+        Debug.Log("Action Map active au Start : " + input.currentActionMap.name);
     }
 
     void Update()
     {
+        if (GameSession.Instance != null && GameSession.Instance.gameEnded)
+            return;
+
         isGrounded = controller.isGrounded;
 
         if (isGrounded && velocity.y < 0)
-        {
-            velocity.y = -2f;  // Pour coller le joueur au sol
-        }
+            velocity.y = -2f;
 
         Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
         float currentSpeed = isWalking ? walkSpeed : runSpeed;
@@ -41,17 +77,13 @@ public class CapsuleController : MonoBehaviour
             jumpQueued = false;
         }
 
-        // Une seule application de la gravité
-        if (velocity.y < 0)
-            velocity.y += gravity * 1.5f * Time.deltaTime;
-        else
-            velocity.y += gravity * Time.deltaTime;
-
+        velocity.y += (velocity.y < 0 ? gravity * 1.5f : gravity) * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
     }
 
     public void Move(InputAction.CallbackContext context)
     {
+        Debug.Log("Walking");
         moveInput = context.ReadValue<Vector2>();
     }
 

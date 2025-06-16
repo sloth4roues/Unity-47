@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class UIManager : MonoBehaviour
 {
@@ -29,10 +30,14 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        remainingTime = totalTime;
 
-        if (goalText != null)
-            UpdateGoalText();
+        GameSettings settings = FindObjectOfType<SpawnBots>()?.settings;
+        if (settings != null && settings.currentGameMode == GameMode.TimeAttack)
+            targetKills = settings.timeAttackTargetCount;
+            totalTime = settings.timeAttackDuration;
+
+        remainingTime = totalTime;
+        UpdateGoalText();
     }
 
     void Update()
@@ -58,6 +63,13 @@ public class UIManager : MonoBehaviour
         deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
         float fps = 1.0f / deltaTime;
         fpsText.text = Mathf.Ceil(fps).ToString() + " FPS";
+    }
+
+    void SelectFirstButton(GameObject panel)
+    {
+        Button firstButton = panel.GetComponentInChildren<Button>();
+        if (firstButton != null)
+            EventSystem.current.SetSelectedGameObject(firstButton.gameObject);
     }
 
     public void RegisterKill()
@@ -104,19 +116,34 @@ public class UIManager : MonoBehaviour
     {
         gameEnded = true;
 
-        if (win && winPanel != null)
-            winPanel.SetActive(true);
-        else if (!win && losePanel != null)
-            losePanel.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
 
-        // Ralentir le temps au lieu de le geler
-        Time.timeScale = 0.01f;
+
+        if (GameSession.Instance != null)
+            GameSession.Instance.gameEnded = true;
+
+        //Time.timeScale = 0.01f;
+
+        if (win && winPanel != null)
+        {
+            winPanel.SetActive(true);
+            SelectFirstButton(winPanel);
+        }
+        else if (!win && losePanel != null)
+        {
+            losePanel.SetActive(true);
+            SelectFirstButton(losePanel);
+        }
     }
+
+
+
+
     public void AddTime(float amount)
     {
         if (!gameEnded)
             remainingTime += amount;
     }
-
 
 }
