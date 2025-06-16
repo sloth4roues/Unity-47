@@ -161,5 +161,4 @@
 
 ---
 
-(Prochaine section : Cartes, armes, économie si souhaité.)
-
+En construction
