@@ -17,12 +17,6 @@ public class GameSession : MonoBehaviour
         Debug.Log("GameSession (NON persistante) créée");
     }
 
-    private void Update()
-    {
-        Debug.Log("PlayerInput actifs : " + FindObjectsOfType<PlayerInput>().Length);
-
-    }
-
     public void EndSession()
     {
         gameEnded = true;

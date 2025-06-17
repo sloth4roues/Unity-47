@@ -211,7 +211,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -2929,6 +2929,12 @@ Transform:
   - {fileID: 1302663126}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!143 &1899597210 stripped
+CharacterController:
+  m_CorrespondingSourceObject: {fileID: 6262601671689703672, guid: 3791fae7384a17c489bd8caa2ab5a48c,
+    type: 3}
+  m_PrefabInstance: {fileID: 9186212983234348886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1922432005
 GameObject:
   m_ObjectHideFlags: 0
@@ -3313,6 +3319,36 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7119574974534609090, guid: 3791fae7384a17c489bd8caa2ab5a48c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.405
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461948022161059464, guid: 3791fae7384a17c489bd8caa2ab5a48c,
+        type: 3}
+      propertyPath: gravity
+      value: -40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461948022161059464, guid: 3791fae7384a17c489bd8caa2ab5a48c,
+        type: 3}
+      propertyPath: runSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461948022161059464, guid: 3791fae7384a17c489bd8caa2ab5a48c,
+        type: 3}
+      propertyPath: jumpForce
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461948022161059464, guid: 3791fae7384a17c489bd8caa2ab5a48c,
+        type: 3}
+      propertyPath: walkSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8461948022161059464, guid: 3791fae7384a17c489bd8caa2ab5a48c,
+        type: 3}
+      propertyPath: controller
+      value: 
+      objectReference: {fileID: 1899597210}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

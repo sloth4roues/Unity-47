@@ -25,51 +25,65 @@ public class UIManager : MonoBehaviour
     [Header("Game End Panels")]
     public GameObject winPanel;
     public GameObject losePanel;
+    public GameObject crosshair;
 
     private bool gameEnded = false;
+    private EventSystem eventSystem;
 
     void Start()
     {
-
         GameSettings settings = FindObjectOfType<SpawnBots>()?.settings;
         if (settings != null && settings.currentGameMode == GameMode.TimeAttack)
+        {
             targetKills = settings.timeAttackTargetCount;
             totalTime = settings.timeAttackDuration;
+        }
 
         remainingTime = totalTime;
         UpdateGoalText();
+        eventSystem = EventSystem.current;
     }
 
     void Update()
     {
         if (gameEnded) return;
 
-        // Timer
-        if (timerText != null)
-        {
-            remainingTime -= Time.deltaTime;
-            if (remainingTime <= 0f)
-            {
-                remainingTime = 0;
-                UpdateTimerText();
-                EndGame(false); // Défaite
-                return;
-            }
-
-            UpdateTimerText();
-        }
-
-        // FPS
-        deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
-        float fps = 1.0f / deltaTime;
-        fpsText.text = Mathf.Ceil(fps).ToString() + " FPS";
+        UpdateTimer();
+        UpdateFPS();
     }
 
-    void SelectFirstButton(GameObject panel)
+    private void UpdateTimer()
     {
+        if (timerText == null) return;
+
+        remainingTime -= Time.deltaTime;
+        if (remainingTime <= 0f)
+        {
+            remainingTime = 0;
+            UpdateTimerText();
+            EndGame(false);
+            return;
+        }
+
+        UpdateTimerText();
+    }
+
+    private void UpdateFPS()
+    {
+        if (fpsText == null) return;
+
+        deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;
+        float fps = 1.0f / deltaTime;
+        fpsText.text = $"{Mathf.CeilToInt(fps)} FPS";
+    }
+
+    private void SelectFirstButton(GameObject panel)
+    {
+        if (eventSystem == null || panel == null) return;
+
         Button firstButton = panel.GetComponentInChildren<Button>();
         if (firstButton != null)
-            EventSystem.current.SetSelectedGameObject(firstButton.gameObject);
+            eventSystem.SetSelectedGameObject(firstButton.gameObject);
     }
 
     public void RegisterKill()
@@ -80,19 +94,16 @@ public class UIManager : MonoBehaviour
         UpdateGoalText();
 
         if (currentKills >= targetKills && !gameEnded)
-        {
-            EndGame(true); 
-        }
+            EndGame(true);
     }
 
-
-    void UpdateGoalText()
+    private void UpdateGoalText()
     {
         if (goalText == null) return;
 
         if (targetKills <= 0)
         {
-            goalText.text = ""; // Objectif facultatif
+            goalText.text = "";
             return;
         }
 
@@ -100,50 +111,44 @@ public class UIManager : MonoBehaviour
         goalText.text = $"Kill {killsLeft} bots";
     }
 
-
-    void UpdateTimerText()
+    private void UpdateTimerText()
     {
+        if (timerText == null) return;
+
         int minutes = Mathf.FloorToInt(remainingTime / 60f);
         int seconds = Mathf.FloorToInt(remainingTime % 60f);
         timerText.text = $"{minutes:00}:{seconds:00}";
     }
+
     public void UpdateAmmo(int current, int max)
     {
         if (ammoText != null)
             ammoText.text = $"{current} / {max}";
     }
-    void EndGame(bool win)
+
+    private void EndGame(bool win)
     {
         gameEnded = true;
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
 
-
         if (GameSession.Instance != null)
             GameSession.Instance.gameEnded = true;
 
-        //Time.timeScale = 0.01f;
+        crosshair.SetActive(false);
 
-        if (win && winPanel != null)
+        GameObject panel = win ? winPanel : losePanel;
+        if (panel != null)
         {
-            winPanel.SetActive(true);
-            SelectFirstButton(winPanel);
-        }
-        else if (!win && losePanel != null)
-        {
-            losePanel.SetActive(true);
-            SelectFirstButton(losePanel);
+            panel.SetActive(true);
+            SelectFirstButton(panel);
         }
     }
-
-
-
 
     public void AddTime(float amount)
     {
         if (!gameEnded)
             remainingTime += amount;
     }
-
 }

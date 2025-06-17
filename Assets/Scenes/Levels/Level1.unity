@@ -3598,6 +3598,7 @@ MonoBehaviour:
   fpsText: {fileID: 1274591295}
   winPanel: {fileID: 806577681}
   losePanel: {fileID: 1236150832}
+  crosshair: {fileID: 44726293}
 --- !u!1 &1495509444
 GameObject:
   m_ObjectHideFlags: 0

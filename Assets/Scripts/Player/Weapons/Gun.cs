@@ -28,6 +28,8 @@ public class Gun : MonoBehaviour
     public GameObject bulletTrailPrefab;
 
     private PlayerInput input;
+    private InputAction fireAction;
+
     public static event Action<int, int> OnAmmoChanged;
 
     private UIManager uiManager;
@@ -37,7 +39,7 @@ public class Gun : MonoBehaviour
         input = GetComponent<PlayerInput>();
     }
 
-    void Start()
+    private void Start()
     {
         currentAmmo = maxAmmo;
         uiManager = FindObjectOfType<UIManager>();
@@ -48,20 +50,19 @@ public class Gun : MonoBehaviour
     {
         if (input?.actions != null)
         {
-            input.actions["Fire"].performed += Fire;
-            input.actions["Fire"].Enable();
+            fireAction = input.actions["Fire"];
+            fireAction.performed += Fire;
+            fireAction.Enable();
         }
     }
 
     private void OnDisable()
     {
-        if (input?.actions != null)
-        {
-            input.actions["Fire"].performed -= Fire;
-        }
+        if (fireAction != null)
+            fireAction.performed -= Fire;
     }
 
-    public void Fire(InputAction.CallbackContext context)
+    private void Fire(InputAction.CallbackContext context)
     {
         if (!context.performed || currentAmmo <= 0)
             return;
@@ -81,10 +82,9 @@ public class Gun : MonoBehaviour
         shootSound?.Play();
 
         Ray ray = new Ray(playerCam.transform.position, playerCam.transform.forward);
-        RaycastHit hit;
-        Vector3 hitPoint = playerCam.transform.position + playerCam.transform.forward * range;
+        Vector3 hitPoint = ray.origin + ray.direction * range;
 
-        if (Physics.Raycast(ray, out hit, range, shootableLayers))
+        if (Physics.Raycast(ray, out RaycastHit hit, range, shootableLayers))
         {
             hitPoint = hit.point;
 
@@ -100,15 +100,15 @@ public class Gun : MonoBehaviour
         }
 
         SpawnBulletTrail(muzzlePoint.position, hitPoint);
-
-        if (currentAmmo == 0)
-            Reload();
     }
 
     public void Reload()
     {
-        currentAmmo = maxAmmo;
-        OnAmmoChanged?.Invoke(currentAmmo, maxAmmo);
+        if (currentAmmo < maxAmmo)
+        {
+            currentAmmo = maxAmmo;
+            OnAmmoChanged?.Invoke(currentAmmo, maxAmmo);
+        }
     }
 
     private void SpawnBulletTrail(Vector3 start, Vector3 end)
@@ -116,14 +116,11 @@ public class Gun : MonoBehaviour
         if (bulletTrailPrefab == null) return;
 
         GameObject trail = Instantiate(bulletTrailPrefab, start, Quaternion.identity);
-        LineRenderer lr = trail.GetComponent<LineRenderer>();
-
-        if (lr)
+        if (trail.TryGetComponent(out LineRenderer lr))
         {
             lr.SetPosition(0, start);
             lr.SetPosition(1, end);
         }
-
         Destroy(trail, 0.2f);
     }
 }

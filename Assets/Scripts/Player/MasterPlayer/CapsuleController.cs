@@ -17,6 +17,9 @@ public class CapsuleController : MonoBehaviour
     [SerializeField] private bool isWalking = false;
 
     private PlayerInput input;
+    private InputAction moveAction;
+    private InputAction jumpAction;
+    private InputAction walkRunAction;
 
     private void Awake()
     {
@@ -26,34 +29,32 @@ public class CapsuleController : MonoBehaviour
 
     private void OnEnable()
     {
-        // Enregistrement des callbacks Input
-        if (input != null && input.actions != null)
+        if (input?.actions != null)
         {
-            input.actions["Move"].performed += Move;
-            input.actions["Move"].canceled += Move;
-            input.actions["Jump"].performed += Jump;
-            input.actions["WalkRun"].performed += WalkRun;
+            moveAction = input.actions["Move"];
+            jumpAction = input.actions["Jump"];
+            walkRunAction = input.actions["WalkRun"];
 
-            input.actions["Move"].Enable();
-            input.actions["Jump"].Enable();
-            input.actions["WalkRun"].Enable();
+            moveAction.performed += Move;
+            moveAction.canceled += Move;
+            jumpAction.performed += Jump;
+            walkRunAction.performed += WalkRun;
+
+            moveAction.Enable();
+            jumpAction.Enable();
+            walkRunAction.Enable();
         }
     }
 
     private void OnDisable()
     {
-        if (input != null && input.actions != null)
+        if (moveAction != null)
         {
-            input.actions["Move"].performed -= Move;
-            input.actions["Move"].canceled -= Move;
-            input.actions["Jump"].performed -= Jump;
-            input.actions["WalkRun"].performed -= WalkRun;
+            moveAction.performed -= Move;
+            moveAction.canceled -= Move;
         }
-    }
-
-    private void Start()
-    {
-        input = GetComponent<PlayerInput>();
+        if (jumpAction != null) jumpAction.performed -= Jump;
+        if (walkRunAction != null) walkRunAction.performed -= WalkRun;
     }
 
     void Update()
@@ -80,24 +81,24 @@ public class CapsuleController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-    public void Move(InputAction.CallbackContext context)
+    private void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<Vector2>();
     }
 
-    public void Jump(InputAction.CallbackContext context)
+    private void Jump(InputAction.CallbackContext context)
     {
         if (context.performed && isGrounded)
-        {
             jumpQueued = true;
+    }
+
+    private void WalkRun(InputAction.CallbackContext context)
+    {
+        if (context.performed && context.control.IsPressed())
+        {
+            isWalking = !isWalking;
+            Debug.Log("isWalking: " + isWalking);
         }
     }
 
-    public void WalkRun(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-        {
-            isWalking = !isWalking;
-        }
-    }
 }

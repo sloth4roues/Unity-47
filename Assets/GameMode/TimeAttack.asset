@@ -16,6 +16,6 @@ MonoBehaviour:
   targetPrefab: {fileID: 9213626513879424142, guid: 9668790cfd3c8594d8567720ba251019,
     type: 3}
   timeAttackTargetCount: 3
-  timeAttackMaxSimultaneousTargets: 50
-  timeAttackDuration: 7
+  timeAttackMaxSimultaneousTargets: 3
+  timeAttackDuration: 2
   endlessTimeBonusPerKill: 0
