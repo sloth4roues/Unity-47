@@ -94,11 +94,12 @@ public class CapsuleController : MonoBehaviour
 
     private void WalkRun(InputAction.CallbackContext context)
     {
-        if (context.performed && context.control.IsPressed())
+        if (context.started)
         {
             isWalking = !isWalking;
             Debug.Log("isWalking: " + isWalking);
         }
     }
+
 
 }
