@@ -1,43 +1,27 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
-public class TimeDash : MonoBehaviour
+public class DioSkillSet : MonoBehaviour
 {
     public float dashDistance = 5f;
     public float dashDelay = 0.1f;
     public float dashEndlag = 0.3f;
 
-    private CharacterController controller;
-    private Vector3 lastMoveDirection;
     private bool isDashing = false;
-
-    [SerializeField] private InputActionReference dashAction;  // Associe ton action "Dash"
-    [SerializeField] private InputActionReference moveAction;  // Associe ton action "Move" (Vector2)
+    private Vector3 lastMoveDirection;
+    private CharacterController controller;
+    private PlayerInput playerInput;
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
-    }
-
-    private void OnEnable()
-    {
-        dashAction.action.performed += OnDash;
-        dashAction.action.Enable();
-        moveAction.action.Enable();
-    }
-
-    private void OnDisable()
-    {
-        dashAction.action.performed -= OnDash;
-        dashAction.action.Disable();
-        moveAction.action.Disable();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Update()
     {
-        // Met à jour la direction selon le stick / clavier
-        Vector2 input = moveAction.action.ReadValue<Vector2>();
+        Vector2 input = playerInput.actions["Move"].ReadValue<Vector2>();
         Vector3 move = new Vector3(input.x, 0, input.y);
         if (move.sqrMagnitude > 0.01f)
         {
@@ -45,9 +29,9 @@ public class TimeDash : MonoBehaviour
         }
     }
 
-    private void OnDash(InputAction.CallbackContext ctx)
+    public void OnSkill1(InputAction.CallbackContext ctx)
     {
-        if (!isDashing)
+        if (ctx.performed && !isDashing)
         {
             StartCoroutine(PerformDash());
         }
@@ -56,7 +40,6 @@ public class TimeDash : MonoBehaviour
     private IEnumerator PerformDash()
     {
         isDashing = true;
-
         yield return new WaitForSeconds(dashDelay);
 
         if (lastMoveDirection == Vector3.zero)
