@@ -30,6 +30,16 @@ public class UIManager : MonoBehaviour
     private bool gameEnded = false;
     private EventSystem eventSystem;
 
+    private void OnEnable()
+    {
+        Gun.OnAmmoChanged += UpdateAmmo;
+    }
+
+    private void OnDisable()
+    {
+        Gun.OnAmmoChanged -= UpdateAmmo;
+    }
+
     void Start()
     {
         GameSettings settings = FindObjectOfType<SpawnBots>()?.settings;
